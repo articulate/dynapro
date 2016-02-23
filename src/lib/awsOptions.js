@@ -5,7 +5,7 @@ const awsBaseOptions = {
   secretaccesskey: process.env.AWS_SECRET_ACCESS_KEY,
   region: process.env.AWS_DEFAULT_REGION,
   retryHandler: (method, table) => {
-    console.log('retrying', method, table)
+    console.log('retrying method', method, table)
   }
 }
 
