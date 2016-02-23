@@ -1,8 +1,8 @@
 {
-  "name": "dynabro",
+  "name": "Dynasaur",
   "version": "0.2.0",
   "description": "A thin promised-based wrapper around Amazon's AWS DynamoDB SDK",
-  "main": "dist/dynabro.js",
+  "main": "dist/dynasaur.js",
   "scripts": {
     "build": "babel src -d dist",
     "version": "npm run build && git add .",
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/articulate/dynabro.git"
+    "url": "git+https://github.com/articulate/dynasaur.git"
   },
   "author": "Spencer Davis",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/articulate/dynabro/issues"
+    "url": "https://github.com/articulate/dynasaur/issues"
   },
-  "homepage": "https://github.com/articulate/dynabro#readme",
+  "homepage": "https://github.com/articulate/dynasaur#readme",
   "dependencies": {
     "aws-sdk": "^2.2.37",
     "babel-preset-es2015": "^6.5.0",
