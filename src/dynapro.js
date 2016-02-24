@@ -5,7 +5,7 @@ import { translateTableParams }                       from './lib/translateParam
 import { AttributeValue as attr }                     from 'dynamodb-data-types'
 import { buildQueryFilters, buildFilter, itemParams } from './lib/helpers'
 
-class Dynasaur {
+class Dynapro {
 
   constructor(options={}) {
     this.db = new AWS.DynamoDB(awsOptions(options))
@@ -63,6 +63,6 @@ class Dynasaur {
   }
 }
 
-Object.assign(Dynasaur.prototype, awsPromised)
+Object.assign(Dynapro.prototype, awsPromised)
 
-export default Dynasaur
+export default Dynapro

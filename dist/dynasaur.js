@@ -28,11 +28,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Dynasaur = function () {
-  function Dynasaur() {
+var Dynapro = function () {
+  function Dynapro() {
     var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    _classCallCheck(this, Dynasaur);
+    _classCallCheck(this, Dynapro);
 
     this.db = new _awsSdk2.default.DynamoDB((0, _awsOptions2.default)(options));
   }
@@ -40,7 +40,7 @@ var Dynasaur = function () {
   // createTable
 
 
-  _createClass(Dynasaur, [{
+  _createClass(Dynapro, [{
     key: 'create',
     value: function create(name, params) {
       return this.createTable((0, _translateParams.translateTableParams)(name, params));
@@ -115,9 +115,9 @@ var Dynasaur = function () {
     }
   }]);
 
-  return Dynasaur;
+  return Dynapro;
 }();
 
-Object.assign(Dynasaur.prototype, _awsPromised2.default);
+Object.assign(Dynapro.prototype, _awsPromised2.default);
 
-exports.default = Dynasaur;
+exports.default = Dynapro;
