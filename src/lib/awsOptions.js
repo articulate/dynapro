@@ -1,4 +1,3 @@
-
 const defaultApiVersion = '2012-08-10'
 
 const defaultAwsOptions = {

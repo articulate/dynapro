@@ -18,7 +18,12 @@
     "url": "git+https://github.com/articulate/dynapro.git"
   },
   "author": "Spencer Davis",
-  "license": "ISC",
+  "keywords": [
+    "dynapro",
+    "dynamo",
+    "dynamodb"
+  ],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/articulate/dynapro/issues"
   },
