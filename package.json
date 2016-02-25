@@ -1,6 +1,6 @@
 {
   "name": "dynapro",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A thin promised-based wrapper around Amazon's AWS DynamoDB SDK",
   "main": "dist/dynapro.js",
   "scripts": {
