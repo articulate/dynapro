@@ -1,6 +1,6 @@
 # Dynapro
 
-Dynapro is a thin promised-based wrapper around Amazon's AWS DynamoDB SDK.
+Dynapro is a thin promised-based wrapper around Amazon's AWS DynamoDB SDK.  This is currently being actively developed and contributions are welcome.  NPM package located at https://www.npmjs.com/package/dynapro.
 
 ## Installation
 
