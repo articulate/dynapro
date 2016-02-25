@@ -9,5 +9,5 @@ const defaultAwsOptions = {
 }
 
 export default function awsOptions(options) {
-  return Object.assign({}, awsBaseOptions, options)
+  return Object.assign({}, defaultAwsOptions, options)
 }
