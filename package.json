@@ -1,5 +1,5 @@
 {
-  "name": "dynapro",
+  "name": "@articulate/dynapro",
   "version": "0.3.0",
   "description": "A thin promised-based wrapper around Amazon's AWS DynamoDB SDK",
   "main": "dist/dynapro.js",
