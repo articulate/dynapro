@@ -76,8 +76,10 @@ var Dynapro = function () {
 
   }, {
     key: 'update',
-    value: function update(tableName, params) {
-      return this.updateItem((0, _helpers.itemParams)(tableName, params));
+    value: function update(tableName, params, expression) {
+      var updateParams = Object.assign({}, (0, _helpers.itemParams)(tableName, params), expression);
+      console.log(updateParams);
+      return this.updateItem(updateParams);
     }
 
     // putItem

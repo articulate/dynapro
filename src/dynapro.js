@@ -33,8 +33,12 @@ class Dynapro {
   }
 
   // updateItem
-  update(tableName, params) {
-    return this.updateItem(itemParams(tableName, params))
+  update(tableName, params, expression) {
+    const updateParams = Object.assign({}, 
+                                       itemParams(tableName, params),
+                                       expression)
+    console.log(updateParams)
+    return this.updateItem(updateParams)
   }
 
   // putItem
