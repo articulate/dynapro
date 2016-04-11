@@ -26,6 +26,8 @@ var _helpers = require('./lib/helpers');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Dynapro = function () {
@@ -76,9 +78,16 @@ var Dynapro = function () {
 
   }, {
     key: 'update',
-    value: function update(tableName, params, expression) {
-      var updateParams = Object.assign({}, (0, _helpers.itemParams)(tableName, params), expression);
-      console.log(updateParams);
+    value: function update(tableName, params, fields) {
+      var props = Object.keys(fields).reduce(function (memo, current) {
+        return memo.concat(_defineProperty({}, current, fields[current]));
+      }, []);
+
+      var AttributeUpdates = props.reduce(function (memo, current) {
+        return memo.put(current);
+      }, _dynamodbDataTypes.AttributeValueUpdate);
+      var updateParams = Object.assign({}, (0, _helpers.itemParams)(tableName, params), { AttributeUpdates: AttributeUpdates });
+
       return this.updateItem(updateParams);
     }
 
