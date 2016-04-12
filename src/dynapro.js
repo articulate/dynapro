@@ -2,7 +2,8 @@ import AWS                                            from 'aws-sdk'
 import awsOptions                                     from './lib/awsOptions'
 import awsPromised                                    from './lib/awsPromised'
 import { translateTableParams }                       from './lib/translateParams'
-import { AttributeValue as attr }                     from 'dynamodb-data-types'
+import { AttributeValue as attr,
+         AttributeValueUpdate as attrUpdate }         from 'dynamodb-data-types'
 import { buildQueryFilters, buildFilter, itemParams } from './lib/helpers'
 
 class Dynapro {
@@ -33,8 +34,13 @@ class Dynapro {
   }
 
   // updateItem
-  update(tableName, params) {
-    return this.updateItem(itemParams(tableName, params))
+  update(tableName, params, fields) {
+    const props = Object.keys(fields).reduce((memo, current) => memo.concat({ [current]: fields[current] }), [])
+
+    const AttributeUpdates  = props.reduce((memo, current) => memo.put(current), attrUpdate)
+    const updateParams      = Object.assign({}, itemParams(tableName, params), { AttributeUpdates })
+
+    return this.updateItem(updateParams)
   }
 
   // putItem
