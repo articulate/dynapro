@@ -57,6 +57,7 @@ class Dynapro {
       TableName: tableName,
       IndexName: params.indexName || null,
       Limit: params.limit || null,
+      ScanIndexForward: params.scanIndexForward === undefined ? true : params.scanIndexForward,
       KeyConditions: {},
       QueryFilter: {}
     }
