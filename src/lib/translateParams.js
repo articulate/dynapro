@@ -41,14 +41,28 @@ function translateLocalSecondaryIndex(index) {
   }
 }
 
+function translateGlobalSecondaryIndex(index) {
+  return {
+    IndexName: index.indexName,
+    KeySchema: translateKeySchema(index.keySchema),
+    Projection: {
+      ProjectionType: index.projectionType.toUpperCase()
+    },
+    ProvisionedThroughput: {
+      ReadCapacityUnits: index.provisionedThroughput.readCapacity,
+      WriteCapacityUnits: index.provisionedThroughput.writeCapacity
+    }
+  }
+}
+
 export function translateTableParams(name, params) {
   const throughput = params.throughput || defaultThroughput
 
   let keySchema = translateKeySchema(params.keySchema)
   let attributeDefinitions = translateAttributeDefinitions(params.keySchema)
   let localSecondaryIndexes = null
+  let globalSecondaryIndexes = null
 
-  // Check for Local Secondary Indexes
   if (params.localSecondaryIndexes) {
     localSecondaryIndexes = []
 
@@ -58,10 +72,20 @@ export function translateTableParams(name, params) {
     })
   }
 
+  if (params.globalSecondaryIndexes) {
+    globalSecondaryIndexes = []
+
+    params.globalSecondaryIndexes.forEach((index) => {
+      globalSecondaryIndexes.push(translateGlobalSecondaryIndex(index))
+      attributeDefinitions.push(translateAttributeDefinition(index.keySchema.hash))
+    })
+  }
+
   return {
     AttributeDefinitions: attributeDefinitions,
     TableName: name,
     KeySchema: keySchema,
+    GlobalSecondaryIndexes: globalSecondaryIndexes,
     LocalSecondaryIndexes: localSecondaryIndexes,
     ProvisionedThroughput: {
       ReadCapacityUnits: throughput.read,
