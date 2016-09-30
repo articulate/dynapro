@@ -84,8 +84,11 @@ var Dynapro = function () {
       }, []);
 
       var AttributeUpdates = props.reduce(function (memo, current) {
-        return memo.put(current);
+        var key = Object.keys(current)[0];
+
+        return current[key] ? memo.put(current) : memo.delete(key);
       }, _dynamodbDataTypes.AttributeValueUpdate);
+
       var updateParams = Object.assign({}, (0, _helpers.itemParams)(tableName, params), { AttributeUpdates: AttributeUpdates });
 
       return this.updateItem(updateParams);
