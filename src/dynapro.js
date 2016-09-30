@@ -37,7 +37,12 @@ class Dynapro {
   update(tableName, params, fields) {
     const props = Object.keys(fields).reduce((memo, current) => memo.concat({ [current]: fields[current] }), [])
 
-    const AttributeUpdates  = props.reduce((memo, current) => memo.put(current), attrUpdate)
+    const AttributeUpdates  = props.reduce((memo, current) => {
+      const key = Object.keys(current)[0];
+
+      return current[key] ? memo.put(current) : memo.delete(key)
+    }, attrUpdate)
+
     const updateParams      = Object.assign({}, itemParams(tableName, params), { AttributeUpdates })
 
     return this.updateItem(updateParams)
