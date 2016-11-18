@@ -84,9 +84,7 @@ var Dynapro = function () {
       }, []);
 
       var AttributeUpdates = props.reduce(function (memo, current) {
-        var key = Object.keys(current)[0];
-
-        return current[key] ? memo.put(current) : memo.delete(key);
+        return memo.put(current);
       }, _dynamodbDataTypes.AttributeValueUpdate);
 
       var updateParams = Object.assign({}, (0, _helpers.itemParams)(tableName, params), { AttributeUpdates: AttributeUpdates });
@@ -115,6 +113,7 @@ var Dynapro = function () {
         IndexName: params.indexName || null,
         Limit: params.limit || null,
         ScanIndexForward: params.scanIndexForward === undefined ? true : params.scanIndexForward,
+        ExclusiveStartKey: params.exclusiveStartKey || null,
         KeyConditions: {},
         QueryFilter: {}
       };
@@ -123,9 +122,11 @@ var Dynapro = function () {
       (0, _helpers.buildQueryFilters)(awsParams.QueryFilter, params.filters);
 
       return this.query(awsParams).then(function (data) {
-        return data.Items.map(function (item) {
+        var Items = data.Items.map(function (item) {
           return _dynamodbDataTypes.AttributeValue.unwrap(item);
         });
+
+        return Object.assign({}, data, { Items: Items });
       });
     }
   }]);
