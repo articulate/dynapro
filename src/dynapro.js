@@ -43,7 +43,7 @@ class Dynapro {
       return current[key] ? memo.put(current) : memo.delete(key)
     }, attrUpdate)
 
-    const updateParams      = Object.assign({}, itemParams(tableName, params), { AttributeUpdates })
+    const updateParams = Object.assign({}, itemParams(tableName, params), { AttributeUpdates })
 
     return this.updateItem(updateParams)
   }
@@ -63,6 +63,7 @@ class Dynapro {
       IndexName: params.indexName || null,
       Limit: params.limit || null,
       ScanIndexForward: params.scanIndexForward === undefined ? true : params.scanIndexForward,
+      ExclusiveStartKey: params.exclusiveStartKey || null,
       KeyConditions: {},
       QueryFilter: {}
     }
@@ -71,7 +72,11 @@ class Dynapro {
     buildQueryFilters(awsParams.QueryFilter, params.filters)
 
     return this.query(awsParams)
-      .then(data => data.Items.map(item => attr.unwrap(item)))
+      .then(data => {
+        const Items = data.Items.map(item => attr.unwrap(item))
+
+        return Object.assign({}, data, { Items })
+      })
   }
 }
 
